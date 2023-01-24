@@ -463,6 +463,8 @@ class Statement extends PDOStatement
         // Convert empty string to null
         $nullEmptyString = ($this->getAttribute(PDO::ATTR_ORACLE_NULLS) == PDO::NULL_EMPTY_STRING);
 
+        $stringifyFetch = $this->getStringify();
+
         // Determine the fetch mode
         switch ($fetchMode) {
             case PDO::FETCH_BOTH:
@@ -587,8 +589,16 @@ class Statement extends PDOStatement
                             $object->$field = $this->loadLob($value);
                         }
                     } else {
-                        $object->$field = $value;
-                    }
+                        $ociFieldIndex = is_int($field) ? $field : array_search($field, array_keys($rs));
+                        if ($stringifyFetch){
+                            $object->$field = $value;
+                        }else{
+                            if (oci_field_type($this->sth, $ociFieldIndex + 1) == 'NUMBER') {
+                                $object->$field = $this->castToNumeric($value);
+                            }else{
+                                $object->$field = $value;
+                            }
+                        }                    }
                 }
 
                 if ($fetchMode === PDO::FETCH_CLASS && method_exists($object, '__construct')) {
@@ -601,6 +611,30 @@ class Statement extends PDOStatement
         return false;
     }
 
+
+    /**
+     * @param bool $stringifyFetch
+     * @return bool
+     */
+    public function getStringify(): bool
+    {
+        $stringifyFetch =true;
+        if (is_array($this->getAttribute(PDO::ATTR_STRINGIFY_FETCHES)) && empty($this->getAttribute(PDO::ATTR_STRINGIFY_FETCHES))) {
+            $stringifyFetch = true;
+        } elseif ($this->getAttribute(PDO::ATTR_STRINGIFY_FETCHES) == true) {
+            $stringifyFetch = true;
+        } elseif ($this->getAttribute(PDO::ATTR_STRINGIFY_FETCHES) == false) {
+            $stringifyFetch = false;
+        }
+        return $stringifyFetch;
+    }
+
+    private function castToNumeric($value){
+        if(is_numeric($value)) {
+            return $val = $value + 0;
+        }
+        return $value;
+    }
     /**
      * Retrieve a statement attribute.
      *
