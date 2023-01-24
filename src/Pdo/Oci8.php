@@ -10,15 +10,15 @@
  * @license   MIT
  */
 
-namespace Yajra\Pdo;
+namespace MahdiAzadbar\Pdo;
 
 use Exception;
 use OCICollection;
 use OCILob;
 use PDO;
 use PDOStatement;
-use Yajra\Pdo\Oci8\Exceptions\Oci8Exception;
-use Yajra\Pdo\Oci8\Statement;
+use MahdiAzadbar\Pdo\Oci8\Exceptions\Oci8Exception;
+use MahdiAzadbar\Pdo\Oci8\Statement;
 
 /**
  * Oci8 class to mimic the interface of the PDO class
@@ -398,7 +398,7 @@ class Oci8 extends PDO
 
     /**
      * Executes an SQL statement, returning the results as a
-     * Yajra\Pdo\Oci8\Statement object.
+     * MahdiAzadbar\Pdo\Oci8\Statement object.
      *
      * @link https://php.net/manual/en/pdo.query.php
      *

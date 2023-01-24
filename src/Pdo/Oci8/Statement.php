@@ -1,6 +1,6 @@
 <?php
 
-namespace Yajra\Pdo\Oci8;
+namespace MahdiAzadbar\Pdo\Oci8;
 
 use Exception;
 use OCILob;
@@ -8,8 +8,8 @@ use PDO;
 use PDOStatement;
 use ReflectionClass;
 use ReflectionException;
-use Yajra\Pdo\Oci8;
-use Yajra\Pdo\Oci8\Exceptions\Oci8Exception;
+use MahdiAzadbar\Pdo\Oci8;
+use MahdiAzadbar\Pdo\Oci8\Exceptions\Oci8Exception;
 
 /**
  * Oci8 Statement class to mimic the interface of the PDOStatement class
