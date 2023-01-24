@@ -20,12 +20,12 @@ tested [OCI8](http://php.net/oci8) functions instead of using the still experime
 
 ## Installation
 
-Add `yajra/laravel-pdo-via-oci8` as a requirement to composer.json:
+Add `mahdiazadbar/laravel-pdo-via-oci8` as a requirement to composer.json:
 
 ```json
 {
     "require": {
-        "yajra/laravel-pdo-via-oci8": "2.*"
+        "mahdiazadbar/laravel-pdo-via-oci8": "2.*"
     }
 }
 ```
@@ -33,7 +33,7 @@ And then run `composer update`
 
 ## PHP 8 Support
 
-When using PHP 8, please use version 3: `"yajra/laravel-pdo-via-oci8": "3.*"`.
+When using PHP 8, please use version 3: `"mahdiazadbar/laravel-pdo-via-oci8": "3.*"`.
 
 ## Testing
 
